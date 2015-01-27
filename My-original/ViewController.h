@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIGestureRecognizerDelegate>
+{
+    UIImageView *player_view;
+    
+    UIImageView *key_view[100];
+    
+    IBOutlet UIImageView *gate_view;
+    
+    
+    int key_Nb;
+    int stage_Nb;
+}
 
-
+-(void)panAction:(UIPanGestureRecognizer *)sender;
+-(IBAction)reset;
 @end
 
