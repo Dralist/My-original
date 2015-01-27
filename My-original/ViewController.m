@@ -18,7 +18,7 @@
     [super viewDidLoad];
     player_view = [[UIImageView alloc]initWithFrame:CGRectMake(230, 510, 80, 80)];
     
-   player_view.backgroundColor = [UIColor blackColor];
+    player_view.backgroundColor = [UIColor blackColor];
    
     
     [self.view addSubview:player_view];
@@ -42,16 +42,18 @@
     
     player_view.center = movedPoint;
     
-    if (CGRectContainsPoint(gate_view.frame, player_view.center)) {
-        NSLog(@"成功");
-    
-    }
-    
-    
     [sender setTranslation:CGPointZero inView:self.view];
     
     if (sender.state == UIGestureRecognizerStateEnded) {
         player_view.center = CGPointMake(270, 550);
+        
+       
+    if (CGRectContainsPoint(gate_view.frame, player_view.center)) {
+        NSLog(@"成功");
+        stage_Nb = stage_Nb + 1;
+        [self makeKey];
+        
+    } 
         
         
         
@@ -67,10 +69,16 @@
         
         key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
         
+        key_view[key_Nb].backgroundColor = [UIColor yellowColor];
         
+        [self.view addSubview:key_view[key_Nb]];
         
-        
+        key_Nb = key_Nb ++;
     }
 }
 
+
+-(IBAction)reset{
+    
+}
 @end
