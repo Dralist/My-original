@@ -15,7 +15,13 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
+    
     [super viewDidLoad];
+    
+    remainingKeies_Nb = 0;
+    
+    
     player_view = [[UIView alloc]initWithFrame:CGRectMake(230, 510, 80, 80)];
     
     player_view.backgroundColor = [UIColor blackColor];
@@ -41,21 +47,25 @@
     
     player_view.center = movedPoint;
      NSLog(@"移動中");
+    [self Getkeys];
+    
     [sender setTranslation:CGPointZero inView:self.view];
     
     if (sender.state == UIGestureRecognizerStateEnded) {
         
-       
+       NSLog(@"ストップ");
     if (CGRectContainsPoint(gate_view.frame, player_view.center)) {
-        
-        
-        
-        NSLog(@"成功");
+        NSLog(@"ゲート到着");
+        if (remainingKeies_Nb <= 0) {
+             NSLog(@"成功");
         stage_Nb = stage_Nb + 1;
         [self makeKey];
-        
-    } 
+        } else {
+            NSLog(@"失敗");
+        }
        
+        
+    }
         player_view.center = CGPointMake(270, 550);
         NSLog(@"戻す");
         
@@ -79,6 +89,7 @@
         
          NSLog(@"ステージ作成");
     }
+    remainingKeies_Nb = stage_Nb;
 }
 
 -(void)Getkeys{
@@ -86,13 +97,14 @@
     while ( del_Nb < stage_Nb) {
         if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center)){
             
-        
-        
+            [key_view[del_Nb] removeFromSuperview];
+            remainingKeies_Nb = remainingKeies_Nb - 1;
+            NSLog(@"鍵ゲット");
+
+            
         }
         
-        
         del_Nb = del_Nb + 1;
-        
     }
 }
 

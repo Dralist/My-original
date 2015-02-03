@@ -19,6 +19,8 @@
     int del_Nb;
     int key_Nb;
     int stage_Nb;
+    int remainingKeies_Nb;
+    
 }
 
 -(void)panAction:(UIPanGestureRecognizer *)sender;
