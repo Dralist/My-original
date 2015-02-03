@@ -10,7 +10,7 @@
 
 @interface ViewController : UIViewController<UIGestureRecognizerDelegate>
 {
-    UIImageView *player_view;
+    UIView *player_view;
     
     UIImageView *key_view[100];
     
@@ -21,7 +21,8 @@
     int stage_Nb;
 }
 
--(void)panAction:(UIPanGestureRecognizer *)sender;
+-(void)panAction:(UIPanGestureRecognizer *)sender;//←書いてる
+
 -(IBAction)reset;
 @end
 
