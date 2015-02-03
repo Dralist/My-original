@@ -12,16 +12,16 @@
 {
     UIView *player_view;
     
-    UIImageView *key_view[100];
+    UIView *key_view[100];
     
     IBOutlet UIImageView *gate_view;
     
-    
+    int del_Nb;
     int key_Nb;
     int stage_Nb;
 }
 
--(void)panAction:(UIPanGestureRecognizer *)sender;//←書いてる
+-(void)panAction:(UIPanGestureRecognizer *)sender;
 
 -(IBAction)reset;
 @end

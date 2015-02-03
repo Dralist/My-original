@@ -21,7 +21,7 @@
     player_view.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:player_view];
-    //panが動かない
+   
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
 
     [player_view addGestureRecognizer:pan];
@@ -44,16 +44,20 @@
     [sender setTranslation:CGPointZero inView:self.view];
     
     if (sender.state == UIGestureRecognizerStateEnded) {
+        
        
     if (CGRectContainsPoint(gate_view.frame, player_view.center)) {
+        
+        
+        
         NSLog(@"成功");
-        player_view.center = CGPointMake(270, 550);
         stage_Nb = stage_Nb + 1;
         [self makeKey];
         
     } 
        
-        
+        player_view.center = CGPointMake(270, 550);
+        NSLog(@"戻す");
         
     }
     
@@ -62,7 +66,7 @@
 -(void)makeKey{
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
-        int Xrandum =arc4random_uniform(275) + 50;
+        int Xrandum =arc4random_uniform(275) + 25;
         int Yrandum =arc4random_uniform(390) + 45;
         
         key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
@@ -71,7 +75,24 @@
         
         [self.view addSubview:key_view[key_Nb]];
         
-        key_Nb = key_Nb ++;
+        key_Nb = key_Nb + 1 ;
+        
+         NSLog(@"ステージ作成");
+    }
+}
+
+-(void)Getkeys{
+    del_Nb = 0;
+    while ( del_Nb < stage_Nb) {
+        if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center)){
+            
+        
+        
+        }
+        
+        
+        del_Nb = del_Nb + 1;
+        
     }
 }
 
