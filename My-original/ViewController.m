@@ -86,15 +86,16 @@
         [self.view addSubview:key_view[key_Nb]];
         
         key_Nb = key_Nb + 1 ;
-        
-         NSLog(@"ステージ作成");
+        remainingKeies_Nb =remainingKeies_Nb + 1 ;
+
     }
-    remainingKeies_Nb = stage_Nb;
+             NSLog(@"ステージ作成");
 }
 
 -(void)Getkeys{
     del_Nb = 0;
     while ( del_Nb < stage_Nb) {
+        
         if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center)){
             
             [key_view[del_Nb] removeFromSuperview];
