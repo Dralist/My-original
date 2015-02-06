@@ -19,6 +19,13 @@
     
     [super viewDidLoad];
     
+    int VV;
+    for (VV = 0; VV <= 99; VV = VV + 1) {
+        yes_no_Nb[VV] = 0;
+    }
+    
+    
+    
     remainingKeies_Nb = 0;
     
     
@@ -82,13 +89,16 @@
         key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
         
         key_view[key_Nb].backgroundColor = [UIColor yellowColor];
-        
+        yes_no_Nb[key_Nb] = 1;
         [self.view addSubview:key_view[key_Nb]];
         
         key_Nb = key_Nb + 1 ;
         remainingKeies_Nb =remainingKeies_Nb + 1 ;
+        
+        
 
     }
+    [self.view bringSubviewToFront:player_view];
              NSLog(@"ステージ作成");
 }
 
@@ -96,11 +106,12 @@
     del_Nb = 0;
     while ( del_Nb < stage_Nb) {
         
-        if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center)){
+        if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center )&& yes_no_Nb[del_Nb] == 1){
             
             [key_view[del_Nb] removeFromSuperview];
             remainingKeies_Nb = remainingKeies_Nb - 1;
             NSLog(@"鍵ゲット");
+            yes_no_Nb[del_Nb] = 0;
 
             
         }
@@ -111,6 +122,12 @@
 
 
 -(IBAction)reset{
-    
+    int VV;
+    for (VV = 0; VV <= 99; VV = VV + 1) {
+        yes_no_Nb[VV] = 0;
+        [key_view[VV] removeFromSuperview];
+    }
+    stage_Nb = 0;
+    remainingKeies_Nb = 0;
 }
 @end

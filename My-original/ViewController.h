@@ -20,6 +20,7 @@
     int key_Nb;
     int stage_Nb;
     int remainingKeies_Nb;
+    int yes_no_Nb[100];
     
 }
 
