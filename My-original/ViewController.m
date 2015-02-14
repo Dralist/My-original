@@ -15,16 +15,15 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    
-    
-    [super viewDidLoad];
+        [super viewDidLoad];
+    score = 0;
+    count = 10;
+    plas_Nb = 0;
     
     int VV;
     for (VV = 0; VV <= 99; VV = VV + 1) {
         yes_no_Nb[VV] = 0;
     }
-    
-    
     
     remainingKeies_Nb = 0;
     
@@ -65,8 +64,24 @@
         NSLog(@"ゲート到着");
         if (remainingKeies_Nb <= 0) {
              NSLog(@"成功");
-        stage_Nb = stage_Nb + 1;
+            
+            if (![count_down isValid]) {
+                count_down = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(down)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            }
+            score = score + plas_Nb;
+            count = count + stage_Nb ;
+            stage_Nb = stage_Nb + 1;
+            
+            timer_label.text = [NSString stringWithFormat:@"%i",count];
+            plas_label.text = @"";
+            score_label.text = [NSString stringWithFormat:@"%i",score];
+            
         [self makeKey];
+            
         } else {
             NSLog(@"失敗");
         }
@@ -83,7 +98,7 @@
 -(void)makeKey{
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
-        int Xrandum =arc4random_uniform(275) + 25;
+        int Xrandum =arc4random_uniform(275) + 35;
         int Yrandum =arc4random_uniform(390) + 45;
         
         key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
@@ -112,6 +127,8 @@
             remainingKeies_Nb = remainingKeies_Nb - 1;
             NSLog(@"鍵ゲット");
             yes_no_Nb[del_Nb] = 0;
+            plas_Nb = plas_Nb + 100 +count;
+            plas_label.text = [NSString stringWithFormat:@"+%i",plas_Nb];
 
             
         }
@@ -119,6 +136,29 @@
         del_Nb = del_Nb + 1;
     }
 }
+
+
+
+
+-(void)down{
+    count = count - 1;
+    
+    if (count < 6 && count > 0) {
+        timer_label.textColor = [UIColor redColor];
+    }else if (count <= 0 ){
+        if ([count_down isValid]) {
+            [count_down invalidate];
+
+        }
+         NSLog(@"time up");
+        int
+
+    }else{
+        timer_label.textColor = [UIColor blackColor];
+    }
+    timer_label.text = [NSString stringWithFormat:@"%i",count];
+}
+
 
 
 -(IBAction)reset{
@@ -129,5 +169,18 @@
     }
     stage_Nb = 0;
     remainingKeies_Nb = 0;
+    plas_Nb = 0;
+    plas_label.text = @"";
+    score = 0;
+    
+    score_label.text = [NSString stringWithFormat:@"%i",score];
+    
+    
+    
+    if ([count_down isValid]) {
+        [count_down invalidate];
+        count= 10;
+        timer_label.text = [NSString stringWithFormat:@"%i",count];
+    }
 }
 @end

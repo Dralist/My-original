@@ -13,18 +13,27 @@
     UIView *player_view;
     
     UIView *key_view[100];
+    NSTimer *count_down;
     
     IBOutlet UIImageView *gate_view;
+    IBOutlet UILabel *timer_label;
+    IBOutlet UILabel *plas_label;
+    IBOutlet UILabel *score_label;
     
     int del_Nb;
     int key_Nb;
     int stage_Nb;
     int remainingKeies_Nb;
     int yes_no_Nb[100];
+    int count;
+    int score;
+    int plas_Nb;
+    int bestscore;
     
 }
 
 -(void)panAction:(UIPanGestureRecognizer *)sender;
+-(void)down;
 
 -(IBAction)reset;
 @end
