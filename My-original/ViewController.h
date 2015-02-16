@@ -14,11 +14,15 @@
     
     UIView *key_view[100];
     NSTimer *count_down;
+    NSUserDefaults *defaults;
     
     IBOutlet UIImageView *gate_view;
     IBOutlet UILabel *timer_label;
     IBOutlet UILabel *plas_label;
     IBOutlet UILabel *score_label;
+    IBOutlet UILabel *fscore_label;
+    IBOutlet UILabel *koment_label;
+
     
     int del_Nb;
     int key_Nb;

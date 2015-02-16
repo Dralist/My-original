@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
         [super viewDidLoad];
+    
+    koment_label.text = @"黒を赤に持ってくとスタートだ！";
     score = 0;
     count = 10;
     plas_Nb = 0;
@@ -37,6 +39,9 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
 
     [player_view addGestureRecognizer:pan];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +51,10 @@
 //
 - (void)panAction:(UIPanGestureRecognizer *)sender
 {
-
+    if (count >= 1) {
+        
+    
+    
     CGPoint p = [sender translationInView:self.view];
 
     CGPoint movedPoint = CGPointMake(player_view.center.x + p.x, player_view.center.y + p.y);
@@ -92,10 +100,17 @@
         NSLog(@"戻す");
         
     }
-    
+    }else {
+        NSLog(@"動きません");
+    }
 }
 
 -(void)makeKey{
+    
+    if (stage_Nb == 1) {
+        koment_label.text = @"";
+    }
+    
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
         int Xrandum =arc4random_uniform(275) + 35;
@@ -145,16 +160,37 @@
     
     if (count < 6 && count > 0) {
         timer_label.textColor = [UIColor redColor];
+        koment_label.text = @"時間が危ないぞ！";
     }else if (count <= 0 ){
+        int VV;
+        for (VV = 0; VV <= 99; VV = VV + 1) {
+            yes_no_Nb[VV] = 0;
+            [key_view[VV] removeFromSuperview];
+        }
+        
         if ([count_down isValid]) {
             [count_down invalidate];
 
         }
          NSLog(@"time up");
-        int
+        player_view.center = CGPointMake(270, 550);
+        NSLog(@"戻す");
+         fscore_label.text = [NSString stringWithFormat:@"%i点",score];
+        defaults = [NSUserDefaults standardUserDefaults];
+        
+        if (score > bestscore) {
+            defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setInteger:score forKey:@"memo"];
+            NSLog(@"記録更新");
+           koment_label.text = @"記録更新おめでとう";
+            plas_label.text = @"";
+        }
+        
+        
 
     }else{
         timer_label.textColor = [UIColor blackColor];
+        koment_label.text = @"";
     }
     timer_label.text = [NSString stringWithFormat:@"%i",count];
 }
@@ -175,12 +211,16 @@
     
     score_label.text = [NSString stringWithFormat:@"%i",score];
     
+     count= 10;
+        timer_label.text = [NSString stringWithFormat:@"%i",count];
     
+    koment_label.text = @"黒を赤に持ってくとスタートだ！";
+    fscore_label.text = @"";
+    timer_label.textColor = [UIColor blackColor];
+
     
     if ([count_down isValid]) {
         [count_down invalidate];
-        count= 10;
-        timer_label.text = [NSString stringWithFormat:@"%i",count];
-    }
+        }
 }
 @end

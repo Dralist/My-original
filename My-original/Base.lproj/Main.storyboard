@@ -54,7 +54,7 @@
                                 <color key="textColor" red="1" green="0.29142702500000001" blue="0.1592138015" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxZ-c6-qxp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxZ-c6-qxp">
                                 <rect key="frame" x="105" y="45" width="226" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.96747448979591832" green="0.48408204886679418" blue="0.11706131161978707" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +78,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="fscore_label" destination="xsU-X9-qnc" id="1d1-MR-xsx"/>
                         <outlet property="gate_view" destination="zK5-8E-I9E" id="Muf-oq-kkm"/>
+                        <outlet property="koment_label" destination="ULr-2U-8T8" id="e0i-CG-wZM"/>
                         <outlet property="plas_label" destination="kxZ-c6-qxp" id="GKK-pY-sea"/>
                         <outlet property="score_label" destination="2cG-Ol-X39" id="u8m-Cg-CQP"/>
                         <outlet property="timer_label" destination="SSk-pl-3Re" id="1ta-78-kYB"/>
