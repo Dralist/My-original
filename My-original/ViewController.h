@@ -32,13 +32,15 @@
     int count;
     int score;
     int plas_Nb;
-    int bestscore;
+    long bestscore;
     
 }
 
 -(void)panAction:(UIPanGestureRecognizer *)sender;
 -(void)down;
+-(void)kekka;
 
 -(IBAction)reset;
+-(IBAction)shokika;
 @end
 

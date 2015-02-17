@@ -41,6 +41,13 @@
     [player_view addGestureRecognizer:pan];
     
     defaults = [NSUserDefaults standardUserDefaults];
+    bestscore = [defaults integerForKey:@"memo"];
+    if (bestscore ==!0) {
+        plas_label.text = [NSString stringWithFormat:@"今までのベスト%li点",bestscore];
+    }
+    
+    
+
 
 }
 
@@ -162,6 +169,9 @@
         timer_label.textColor = [UIColor redColor];
         koment_label.text = @"時間が危ないぞ！";
     }else if (count <= 0 ){
+        
+        
+        
         int VV;
         for (VV = 0; VV <= 99; VV = VV + 1) {
             yes_no_Nb[VV] = 0;
@@ -173,27 +183,44 @@
 
         }
          NSLog(@"time up");
+        
         player_view.center = CGPointMake(270, 550);
         NSLog(@"戻す");
-         fscore_label.text = [NSString stringWithFormat:@"%i点",score];
-        defaults = [NSUserDefaults standardUserDefaults];
         
-        if (score > bestscore) {
-            defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setInteger:score forKey:@"memo"];
-            NSLog(@"記録更新");
-           koment_label.text = @"記録更新おめでとう";
-            plas_label.text = @"";
-        }
-        
-        
+        plas_label.text = @"";
 
+        [self kekka];
+        
+        
     }else{
         timer_label.textColor = [UIColor blackColor];
         koment_label.text = @"";
     }
     timer_label.text = [NSString stringWithFormat:@"%i",count];
 }
+
+-(void)kekka{
+    NSLog(@"結果発表");
+    
+    fscore_label.text = [NSString stringWithFormat:@"%i点",score];//点数表示
+    bestscore = 0;
+    defaults = [NSUserDefaults standardUserDefaults];
+    bestscore = [defaults integerForKey:@"memo"];
+    
+    if (score > bestscore) {
+        defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:score forKey:@"memo"];
+        NSLog(@"記録更新");
+        koment_label.text = @"記録更新おめでとう";
+    }else{
+        koment_label.text = @"頑張ろう";
+        
+    }
+
+    
+}
+
+
 
 
 
@@ -217,10 +244,33 @@
     koment_label.text = @"黒を赤に持ってくとスタートだ！";
     fscore_label.text = @"";
     timer_label.textColor = [UIColor blackColor];
+    
+    plas_label.text = [NSString stringWithFormat:@"今までのベスト%li点",bestscore];
 
     
     if ([count_down isValid]) {
         [count_down invalidate];
         }
 }
+
+-(IBAction)shokika{
+    UIAlertView *zero = [[UIAlertView alloc]initWithTitle:@"警告だよ！"
+                                                   message:@"bestscoreをゼロにします。よろしいですか？"
+                                                  delegate:nil
+                                         cancelButtonTitle:@"キャンセル"
+                                         otherButtonTitles:@"OK", nil];
+    [zero show];
+    
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if( buttonIndex != alertView.cancelButtonIndex )
+    {
+        [defaults setInteger:0 forKey:@"memo"];
+
+    }
+}
+
 @end
