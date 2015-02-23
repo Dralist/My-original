@@ -25,7 +25,10 @@
     int VV;
     for (VV = 0; VV <= 99; VV = VV + 1) {
         yes_no_Nb[VV] = 0;
+        
     }
+    o_Nb = 0;
+    
     
     remainingKeies_Nb = 0;
     
@@ -58,10 +61,8 @@
 //
 - (void)panAction:(UIPanGestureRecognizer *)sender
 {
-    if (count >= 1) {
-        
-    
-    
+    if ( count > 0 ) {
+        o_Nb = 1;
     CGPoint p = [sender translationInView:self.view];
 
     CGPoint movedPoint = CGPointMake(player_view.center.x + p.x, player_view.center.y + p.y);
@@ -102,11 +103,31 @@
         }
        
         
+    }else{
+        NSLog(@"やり直し");
+        
+        plas_Nb = 0;
+        plas_label.text = @"";
+        key_Nb = 0;
+        while (key_Nb < stage_Nb) {
+            if (yes_no_Nb [key_Nb]== 0) {
+                            yes_no_Nb[key_Nb] = 1;
+            
+            [self.view addSubview:key_view[key_Nb]];
+            
+            remainingKeies_Nb =remainingKeies_Nb + 1 ;
+            }
+            
+            
+            key_Nb = key_Nb + 1 ;
+        }
+        
     }
         player_view.center = CGPointMake(270, 550);
         NSLog(@"戻す");
         
     }
+    
     }else {
         NSLog(@"動きません");
     }
@@ -120,6 +141,7 @@
     
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
+        
         int Xrandum =arc4random_uniform(275) + 35;
         int Yrandum =arc4random_uniform(390) + 45;
         
@@ -171,7 +193,6 @@
     }else if (count <= 0 ){
         
         
-        
         int VV;
         for (VV = 0; VV <= 99; VV = VV + 1) {
             yes_no_Nb[VV] = 0;
@@ -189,6 +210,7 @@
         
         plas_label.text = @"";
 
+        timer_label.text = [NSString stringWithFormat:@"%i",count];
         [self kekka];
         
         
@@ -202,7 +224,22 @@
 -(void)kekka{
     NSLog(@"結果発表");
     
-    fscore_label.text = [NSString stringWithFormat:@"%i点",score];//点数表示
+    koment_label.text = @"";
+    int KK = 0;
+    float SS = 0.0000000000000000000000000000000000000000000002;
+    while (KK < score) {
+        [[NSRunLoop currentRunLoop]
+         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:SS]
+         ];
+        KK = KK +1 ;
+        fscore_label.text = [NSString stringWithFormat:@"%i点",KK];
+        
+        
+    }
+    
+    
+    
+    //点数表示
     bestscore = 0;
     defaults = [NSUserDefaults standardUserDefaults];
     bestscore = [defaults integerForKey:@"memo"];
@@ -244,19 +281,28 @@
     koment_label.text = @"黒を赤に持ってくとスタートだ！";
     fscore_label.text = @"";
     timer_label.textColor = [UIColor blackColor];
+
+    defaults = [NSUserDefaults standardUserDefaults];
+    bestscore = [defaults integerForKey:@"memo"];
     
     plas_label.text = [NSString stringWithFormat:@"今までのベスト%li点",bestscore];
+    if (bestscore ==0) {
+        plas_label.text = @"";
+    }
 
     
     if ([count_down isValid]) {
         [count_down invalidate];
         }
+    
+    
+     NSLog(@"最初から");
 }
 
 -(IBAction)shokika{
     UIAlertView *zero = [[UIAlertView alloc]initWithTitle:@"警告だよ！"
                                                    message:@"bestscoreをゼロにします。よろしいですか？"
-                                                  delegate:nil
+                                                  delegate:self
                                          cancelButtonTitle:@"キャンセル"
                                          otherButtonTitles:@"OK", nil];
     [zero show];
@@ -269,8 +315,54 @@
     if( buttonIndex != alertView.cancelButtonIndex )
     {
         [defaults setInteger:0 forKey:@"memo"];
+        plas_label.text = @"";
 
     }
 }
 
+
+-(IBAction)stop{
+    
+    if (count > 0 && o_Nb == 1) {
+        NSLog(@"ボタン");
+    
+    if ([count_down isValid]) {
+        [count_down invalidate];
+        koment_label.text = @"一時停止中";
+        
+    
+    NSLog(@"一時停止");
+    player_view.center = CGPointMake(270, 550);
+    NSLog(@"戻す");
+    plas_Nb = 0;
+    plas_label.text = @"";
+    key_Nb = 0;
+    while (key_Nb < stage_Nb) {
+        
+        if (yes_no_Nb [key_Nb]== 0) {
+            yes_no_Nb[key_Nb] = 1;
+            
+            [self.view addSubview:key_view[key_Nb]];
+            
+            remainingKeies_Nb =remainingKeies_Nb + 1 ;
+            
+            
+        }
+        key_Nb = key_Nb +1;
+    
+    }
+    
+    }else{
+        NSLog(@"再会");
+        if (![count_down isValid]) {
+            count_down = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(down)
+                                                        userInfo:nil
+                                                         repeats:YES];
+        }
+    }
+    fscore_label.text = @"";
+    }
+}
 @end

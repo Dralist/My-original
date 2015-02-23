@@ -33,6 +33,7 @@
     int score;
     int plas_Nb;
     long bestscore;
+    int o_Nb;
     
 }
 
@@ -42,5 +43,6 @@
 
 -(IBAction)reset;
 -(IBAction)shokika;
+-(IBAction)stop;
 @end
 
