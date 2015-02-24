@@ -27,8 +27,7 @@
         yes_no_Nb[VV] = 0;
         
     }
-    o_Nb = 0;
-    
+    gamemode_Nb = 0;
     
     remainingKeies_Nb = 0;
     
@@ -61,8 +60,10 @@
 //
 - (void)panAction:(UIPanGestureRecognizer *)sender
 {
-    if ( count > 0 ) {
-        o_Nb = 1;
+
+    
+    if ( count > 0 && gamemode_Nb != 1) {
+       
     CGPoint p = [sender translationInView:self.view];
 
     CGPoint movedPoint = CGPointMake(player_view.center.x + p.x, player_view.center.y + p.y);
@@ -87,6 +88,7 @@
                                                         selector:@selector(down)
                                                         userInfo:nil
                                                          repeats:YES];
+                gamemode_Nb = 2;
             }
             score = score + plas_Nb;
             count = count + stage_Nb ;
@@ -213,6 +215,8 @@
         timer_label.text = [NSString stringWithFormat:@"%i",count];
         [self kekka];
         
+        gamemode_Nb = 0;
+        
         
     }else{
         timer_label.textColor = [UIColor blackColor];
@@ -226,10 +230,10 @@
     
     koment_label.text = @"";
     int KK = 0;
-    float SS = 0.0000000000000000000000000000000000000000000002;
+   
     while (KK < score) {
         [[NSRunLoop currentRunLoop]
-         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:SS]
+         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0000000001]
          ];
         KK = KK +1 ;
         fscore_label.text = [NSString stringWithFormat:@"%i点",KK];
@@ -272,11 +276,9 @@
     plas_Nb = 0;
     plas_label.text = @"";
     score = 0;
-    
+    count = 10;
+    timer_label.text = [NSString stringWithFormat:@"%i",count];
     score_label.text = [NSString stringWithFormat:@"%i",score];
-    
-     count= 10;
-        timer_label.text = [NSString stringWithFormat:@"%i",count];
     
     koment_label.text = @"黒を赤に持ってくとスタートだ！";
     fscore_label.text = @"";
@@ -294,7 +296,8 @@
     if ([count_down isValid]) {
         [count_down invalidate];
         }
-    
+    gamemode_Nb = 0;
+
     
      NSLog(@"最初から");
 }
@@ -323,21 +326,34 @@
 
 -(IBAction)stop{
     
-    if (count > 0 && o_Nb == 1) {
+    if (count > 0 && gamemode_Nb != 0 && gamemode_Nb != 1) {
         NSLog(@"ボタン");
     
-    if ([count_down isValid]) {
-        [count_down invalidate];
-        koment_label.text = @"一時停止中";
+    koment_label.text = @"一時停止中";
         
+        if ([count_down isValid]) {
+        [count_down invalidate];
+        
+        }
     
+        
+        
     NSLog(@"一時停止");
-    player_view.center = CGPointMake(270, 550);
+    
+        
+        
+        player_view.center = CGPointMake(270, 550);
     NSLog(@"戻す");
-    plas_Nb = 0;
-    plas_label.text = @"";
-    key_Nb = 0;
-    while (key_Nb < stage_Nb) {
+    
+        plas_Nb = 0;
+    
+        plas_label.text = @"";
+    
+        
+        
+        key_Nb = 0;
+        
+        while (key_Nb < stage_Nb) {
         
         if (yes_no_Nb [key_Nb]== 0) {
             yes_no_Nb[key_Nb] = 1;
@@ -347,13 +363,21 @@
             remainingKeies_Nb =remainingKeies_Nb + 1 ;
             
             
-        }
+            }
         key_Nb = key_Nb +1;
     
-    }
     
-    }else{
+        
+        gamemode_Nb = 1;
+    
+    }
+    fscore_label.text = @"";
+        
+    }else if(gamemode_Nb == 1){
+        
         NSLog(@"再会");
+        
+        
         if (![count_down isValid]) {
             count_down = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                           target:self
@@ -361,8 +385,13 @@
                                                         userInfo:nil
                                                          repeats:YES];
         }
+    gamemode_Nb = 2;
+    
     }
-    fscore_label.text = @"";
-    }
+
+
+
+
+
 }
 @end

@@ -33,16 +33,18 @@
     int score;
     int plas_Nb;
     long bestscore;
-    int o_Nb;
+    int gamemode_Nb;//0=最初の画面 1= 一時停止中　2＝ゲーム中モード０
+    
+    
     
 }
 
 -(void)panAction:(UIPanGestureRecognizer *)sender;
 -(void)down;
 -(void)kekka;
-
+-(IBAction)stop;
 -(IBAction)reset;
 -(IBAction)shokika;
--(IBAction)stop;
+
 @end
 

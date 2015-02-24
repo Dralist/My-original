@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zK5-8E-I9E" customClass="UICollectionView">
-                                <rect key="frame" x="32" y="476" width="117" height="162"/>
+                                <rect key="frame" x="16" y="497" width="117" height="162"/>
                                 <color key="backgroundColor" red="1" green="0.093389172549999996" blue="0.1592822186" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbk-fA-zfI">
@@ -62,18 +62,8 @@
                                 <color key="textColor" red="0.27745343868850175" green="0.53027360584603722" blue="0.89684311224489799" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3E-Th-cD4">
-                                <rect key="frame" x="165" y="607" width="77" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="初期化">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shokika" destination="vXZ-lx-hvc" eventType="touchUpInside" id="afU-LW-58n"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjB-RZ-Xx2">
-                                <rect key="frame" x="157" y="573" width="92" height="40"/>
+                                <rect key="frame" x="135" y="573" width="92" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="やり直す">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,14 +72,24 @@
                                     <action selector="reset" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mQe-3P-nSm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekb-8M-yhP">
-                                <rect key="frame" x="16" y="59" width="63" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="おおお">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3E-Th-cD4">
+                                <rect key="frame" x="143" y="607" width="77" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="初期化">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stop" destination="vXZ-lx-hvc" eventType="touchDown" id="9n1-CN-CPk"/>
+                                    <action selector="shokika" destination="vXZ-lx-hvc" eventType="touchUpInside" id="afU-LW-58n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfV-Ye-tK9">
+                                <rect key="frame" x="149" y="530" width="65" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stop" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qwu-4H-gEZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -108,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-180.5" y="-634.5"/>
+            <point key="canvasLocation" x="-180.5" y="-639.5"/>
         </scene>
     </scenes>
 </document>
