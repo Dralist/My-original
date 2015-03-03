@@ -34,6 +34,7 @@
     int plas_Nb;
     long bestscore;
     int gamemode_Nb;//0=最初の画面 1= 一時停止中　2＝ゲーム中モード０
+    int poizen_Nb;
     
     
     

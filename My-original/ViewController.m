@@ -92,11 +92,24 @@
             }
             score = score + plas_Nb;
             count = count + stage_Nb ;
+            if (count > 30) {
+                count = 30 ;
+            }
+            
             stage_Nb = stage_Nb + 1;
             
             timer_label.text = [NSString stringWithFormat:@"%i",count];
             plas_label.text = @"";
             score_label.text = [NSString stringWithFormat:@"%i",score];
+            
+            int AS = 10;
+            while (AS < stage_Nb) {
+                [key_view[AS] removeFromSuperview];
+                AS = AS + 1;
+            }
+            
+            
+            
             
         [self makeKey];
             
@@ -143,21 +156,25 @@
     
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
+         int Xrandum =arc4random_uniform(275) + 35;
+         int Yrandum =arc4random_uniform(390) + 45;
         
-        int Xrandum =arc4random_uniform(275) + 35;
-        int Yrandum =arc4random_uniform(390) + 45;
-        
-        key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
-        
-        key_view[key_Nb].backgroundColor = [UIColor yellowColor];
         yes_no_Nb[key_Nb] = 1;
-        [self.view addSubview:key_view[key_Nb]];
-        
-        key_Nb = key_Nb + 1 ;
-        remainingKeies_Nb =remainingKeies_Nb + 1 ;
-        
-        
+        key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
+                [self.view addSubview:key_view[key_Nb]];
+        if (key_Nb > 9) {
+            key_view[key_Nb].backgroundColor = [UIColor purpleColor];
+          
+        }else{
+            key_view[key_Nb].backgroundColor = [UIColor yellowColor];
 
+            remainingKeies_Nb =remainingKeies_Nb + 1 ;
+        }
+        key_Nb = key_Nb + 1 ;
+        
+        
+        
+  
     }
     [self.view bringSubviewToFront:player_view];
              NSLog(@"ステージ作成");
@@ -170,12 +187,25 @@
         if (CGRectContainsPoint(key_view[del_Nb].frame, player_view.center )&& yes_no_Nb[del_Nb] == 1){
             
             [key_view[del_Nb] removeFromSuperview];
-            remainingKeies_Nb = remainingKeies_Nb - 1;
-            NSLog(@"鍵ゲット");
             yes_no_Nb[del_Nb] = 0;
-            plas_Nb = plas_Nb + 100 +count;
+
+            if (del_Nb < 10) {
+                NSLog(@"鍵ゲット");
+                remainingKeies_Nb = remainingKeies_Nb - 1;
+                
+                        plas_Nb = plas_Nb + 100 +count;
             plas_label.text = [NSString stringWithFormat:@"+%i",plas_Nb];
 
+            }else{
+                NSLog(@"毒だ！！！");
+                count = count - 5;
+                
+                timer_label.text = [NSString stringWithFormat:@"%i",count];
+                
+                
+            }
+            
+           
             
         }
         
