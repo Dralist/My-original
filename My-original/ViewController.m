@@ -108,8 +108,7 @@
                 AS = AS + 1;
             }
             
-            
-            
+            [enemy_view removeFromSuperview];
             
         [self makeKey];
             
@@ -154,6 +153,21 @@
         koment_label.text = @"";
     }
     
+    
+    if (stage_Nb % 5 == 0) {
+        int Xenrmy =arc4random_uniform(205) + 35;
+        int Yenemy =arc4random_uniform(315) + 45;
+    
+        enemy_view = [[UIImageView alloc]initWithFrame:CGRectMake(Xenrmy, Yenemy, 120, 120)];
+        enemy_view.backgroundColor =[UIColor brownColor];
+        [self.view addSubview:enemy_view];
+    }
+    
+
+    
+    
+    
+    
     key_Nb = 0;
     while (key_Nb < stage_Nb) {
          int Xrandum =arc4random_uniform(275) + 35;
@@ -161,7 +175,10 @@
         
         yes_no_Nb[key_Nb] = 1;
         key_view[key_Nb] = [[UIImageView alloc]initWithFrame:CGRectMake(Xrandum, Yrandum, 50, 50)];
-                [self.view addSubview:key_view[key_Nb]];
+        
+        
+        
+        
         if (key_Nb > 9) {
             key_view[key_Nb].backgroundColor = [UIColor purpleColor];
           
@@ -170,11 +187,23 @@
 
             remainingKeies_Nb =remainingKeies_Nb + 1 ;
         }
+        
+        
+        if (CGRectContainsPoint(enemy_view.frame, key_view[key_Nb].center)) {
+            NSLog(@"dameda");
+            if (key_Nb <= 9) {
+                remainingKeies_Nb =remainingKeies_Nb - 1 ;
+
+            }
+            
+            
+        }else{
+            
+            [self.view addSubview:key_view[key_Nb]];
+        NSLog(@"OK");
         key_Nb = key_Nb + 1 ;
+        }
         
-        
-        
-  
     }
     [self.view bringSubviewToFront:player_view];
              NSLog(@"ステージ作成");
@@ -199,7 +228,9 @@
             }else{
                 NSLog(@"毒だ！！！");
                 count = count - 5;
-                
+                if (count <= 0) {
+                    count = 1;
+                }
                 timer_label.text = [NSString stringWithFormat:@"%i",count];
                 
                 
@@ -211,6 +242,36 @@
         
         del_Nb = del_Nb + 1;
     }
+    
+    
+    if (CGRectContainsPoint(enemy_view.frame, player_view.center) && stage_Nb % 5 == 0) {
+        NSLog(@"やり直し");
+        
+        plas_Nb = 0;
+        plas_label.text = @"";
+        key_Nb = 0;
+        while (key_Nb < stage_Nb) {
+            if (yes_no_Nb [key_Nb]== 0) {
+                yes_no_Nb[key_Nb] = 1;
+                
+                [self.view addSubview:key_view[key_Nb]];
+                
+                remainingKeies_Nb =remainingKeies_Nb + 1 ;
+            }
+            
+            
+            key_Nb = key_Nb + 1 ;
+        }
+        
+    
+    player_view.center = CGPointMake(270, 550);
+    NSLog(@"戻す");
+    }
+    
+    
+    
+    
+    
 }
 
 
@@ -235,6 +296,8 @@
             [count_down invalidate];
 
         }
+        
+        [enemy_view removeFromSuperview];
          NSLog(@"time up");
         
         player_view.center = CGPointMake(270, 550);

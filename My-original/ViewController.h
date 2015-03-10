@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController<UIGestureRecognizerDelegate>
 {
     UIView *player_view;
+    UIView *enemy_view;
     
     UIView *key_view[100];
     NSTimer *count_down;
