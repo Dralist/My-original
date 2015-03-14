@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
         [super viewDidLoad];
     
+     UIImage *img_sheep = [UIImage imageNamed:@"image001.png"];
+
+   
+    
     koment_label.text = @"黒を赤に持ってくとスタートだ！";
     score = 0;
     count = 10;
@@ -32,10 +36,9 @@
     remainingKeies_Nb = 0;
     
     
-    player_view = [[UIView alloc]initWithFrame:CGRectMake(230, 510, 80, 80)];
+    player_view = [[UIImageView alloc]initWithFrame:CGRectMake(230, 510, 80, 80)];
     
-    player_view.backgroundColor = [UIColor blackColor];
-    
+    player_view.image = [[UIImageView alloc] initWithImage:img_sheep];
     [self.view addSubview:player_view];
    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
@@ -50,6 +53,7 @@
     
     
 
+    
 
 }
 
@@ -62,7 +66,11 @@
 {
 
     
-    if ( count > 0 && gamemode_Nb != 1) {
+        
+    
+    
+    
+    if ( count > 0 && gamemode_Nb != 1 &&  gamemode_Nb != 4)  {
        
     CGPoint p = [sender translationInView:self.view];
 
@@ -143,6 +151,11 @@
     }
     
     }else {
+        
+        
+        if (sender.state == UIGestureRecognizerStateEnded && gamemode_Nb == 4) {
+            gamemode_Nb = 2;
+        }
         NSLog(@"動きません");
     }
 }
@@ -266,6 +279,8 @@
     
     player_view.center = CGPointMake(270, 550);
     NSLog(@"戻す");
+        gamemode_Nb = 4;
+    
     }
     
     

@@ -10,10 +10,10 @@
 
 @interface ViewController : UIViewController<UIGestureRecognizerDelegate>
 {
-    UIView *player_view;
-    UIView *enemy_view;
+    UIImageView *player_view;
+    UIImageView *enemy_view;
     
-    UIView *key_view[100];
+    UIImageView *key_view[100];
     NSTimer *count_down;
     NSUserDefaults *defaults;
     
@@ -37,8 +37,11 @@
     int gamemode_Nb;//0=最初の画面 1= 一時停止中　2＝ゲーム中モード０
     int poizen_Nb;
     
+   
     
     
+    
+
 }
 
 -(void)panAction:(UIPanGestureRecognizer *)sender;
