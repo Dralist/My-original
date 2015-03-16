@@ -16,8 +16,7 @@
 
 - (void)viewDidLoad {
         [super viewDidLoad];
-    
-     UIImage *img_sheep = [UIImage imageNamed:@"image001.png"];
+
 
    
     
@@ -38,7 +37,10 @@
     
     player_view = [[UIImageView alloc]initWithFrame:CGRectMake(230, 510, 80, 80)];
     
-    player_view.image = [[UIImageView alloc] initWithImage:img_sheep];
+    player_view.backgroundColor = [UIColor blackColor];
+
+    player_view.image = [UIImage imageNamed:@"image001.png"];
+    
     [self.view addSubview:player_view];
    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
@@ -65,8 +67,6 @@
 - (void)panAction:(UIPanGestureRecognizer *)sender
 {
 
-    
-        
     
     
     
@@ -196,8 +196,9 @@
             key_view[key_Nb].backgroundColor = [UIColor purpleColor];
           
         }else{
-            key_view[key_Nb].backgroundColor = [UIColor yellowColor];
-
+            
+            
+            key_view[key_Nb].image = [UIImage imageNamed:@"imagekagi.png"];
             remainingKeies_Nb =remainingKeies_Nb + 1 ;
         }
         
